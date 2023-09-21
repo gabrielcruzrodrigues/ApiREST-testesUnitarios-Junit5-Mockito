@@ -2,6 +2,7 @@ package br.com.gabriel.api.config;
 
 import br.com.gabriel.api.domain.Person;
 import br.com.gabriel.api.repositories.PersonRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,6 +10,7 @@ import org.springframework.context.annotation.Profile;
 
 import java.util.List;
 
+@Slf4j
 @Configuration
 @Profile("local")
 public class LocalConfig {
@@ -22,6 +24,7 @@ public class LocalConfig {
         Person person2 = new Person(null, "Samuel", "samuel@gmail.com", "123");
 
         personRepository.saveAll(List.of(person1, person2));
+        log.info("passou config");
     }
 
 }
