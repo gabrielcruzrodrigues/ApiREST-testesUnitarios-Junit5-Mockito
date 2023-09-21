@@ -24,7 +24,6 @@ public class LocalConfig {
         Person person2 = new Person(null, "Samuel", "samuel@gmail.com", "123");
 
         personRepository.saveAll(List.of(person1, person2));
-        log.info("passou config");
     }
 
 }
