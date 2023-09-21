@@ -1,7 +1,6 @@
 package br.com.gabriel.api.domain;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
 import lombok.*;
 
 @Data
