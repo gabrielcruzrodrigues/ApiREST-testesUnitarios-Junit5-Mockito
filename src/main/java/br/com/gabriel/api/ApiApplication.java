@@ -1,6 +1,5 @@
 package br.com.gabriel.api;
 
-import br.com.gabriel.api.domain.User;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
