@@ -27,7 +27,7 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public Person findById(Integer id) {
         Optional<Person> obj = personRepository.findById(id);
-        return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado!"));
+        return obj.orElseThrow(() -> new ObjectNotFoundException("Pessoa não encontrada!"));
     }
 
     public List<Person> findAll() {
@@ -44,6 +44,12 @@ public class PersonServiceImpl implements PersonService {
     public Person update(PersonDTO obj) {
         findByEmail(obj);
         return personRepository.save(mapper.map(obj, Person.class));
+    }
+
+    @Override
+    public void delete(Integer id) {
+        findById(id);
+        personRepository.deleteById(id);
     }
 
     private void findByEmail(PersonDTO obj) {
