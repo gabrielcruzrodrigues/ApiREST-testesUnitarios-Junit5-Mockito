@@ -3,6 +3,7 @@ package br.com.gabriel.api.services.impl;
 import br.com.gabriel.api.domain.Person;
 import br.com.gabriel.api.domain.dto.PersonDTO;
 import br.com.gabriel.api.repositories.PersonRepository;
+import br.com.gabriel.api.services.exceptions.ObjectNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -57,6 +58,18 @@ public class PersonServiceImplTest {
         assertEquals(ID, response.getId());
         assertEquals(NAME, response.getName());
         assertEquals(EMAIL, response.getEmail());
+    }
+
+    @Test
+    void shouldAnOnObjectNotFoundException_whenToCallFindById() {
+        when(personRepository.findById(anyInt())).thenThrow(new ObjectNotFoundException("Pessoa não encontrada!"));
+
+        try {
+            personRepository.findById(ID);
+        } catch(Exception ex) {
+            assertEquals(ObjectNotFoundException.class, ex.getClass());
+            assertEquals("Pessoa não encontrada!", ex.getMessage());
+        }
     }
 
     @Test
