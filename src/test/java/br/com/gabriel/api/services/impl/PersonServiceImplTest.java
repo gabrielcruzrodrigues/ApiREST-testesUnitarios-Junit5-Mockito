@@ -27,6 +27,8 @@ public class PersonServiceImplTest {
     public static final String NAME = "Gabriel";
     public static final String EMAIL = "gabriel@gmail.com";
     public static final String PASSWORD = "123";
+    
+    public static final String PERSON_NOT_FOUND = "Pessoa não encontrada!";
 
     @InjectMocks
     private PersonServiceImpl personService;
@@ -62,13 +64,13 @@ public class PersonServiceImplTest {
 
     @Test
     void shouldAnOnObjectNotFoundException_whenToCallFindById() {
-        when(personRepository.findById(anyInt())).thenThrow(new ObjectNotFoundException("Pessoa não encontrada!"));
+        when(personRepository.findById(anyInt())).thenThrow(new ObjectNotFoundException(PERSON_NOT_FOUND));
 
         try {
             personRepository.findById(ID);
         } catch(Exception ex) {
             assertEquals(ObjectNotFoundException.class, ex.getClass());
-            assertEquals("Pessoa não encontrada!", ex.getMessage());
+            assertEquals(PERSON_NOT_FOUND, ex.getMessage());
         }
     }
 
@@ -78,6 +80,7 @@ public class PersonServiceImplTest {
 
     @Test
     void create() {
+
     }
 
     @Test
