@@ -12,9 +12,9 @@ public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    private String name;
 
     @Column(unique = true)
-    private String name;
     private String email;
     private String password;
 }
