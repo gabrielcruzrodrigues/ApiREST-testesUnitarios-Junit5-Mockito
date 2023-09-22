@@ -1,10 +1,8 @@
 package br.com.gabriel.api.resources;
 
-import br.com.gabriel.api.config.ModelMapperConfig;
 import br.com.gabriel.api.domain.Person;
 import br.com.gabriel.api.domain.dto.PersonDTO;
 import br.com.gabriel.api.services.PersonService;
-//import br.com.gabriel.api.services.impl.PersonServiceImpl;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -41,5 +39,11 @@ public class PersonResource {
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest().path("/{id}").buildAndExpand(personService.create(obj).getId()).toUri();
         return ResponseEntity.created(uri).build();
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<PersonDTO> update(@RequestBody PersonDTO obj, @PathVariable Integer id) {
+        obj.setId(id);
+        return ResponseEntity.ok().body(mapper.map(personService.update(obj), PersonDTO.class));
     }
 }

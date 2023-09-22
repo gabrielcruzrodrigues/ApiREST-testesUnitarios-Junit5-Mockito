@@ -10,4 +10,5 @@ public interface PersonService {
     Person findById(Integer id);
     List<Person> findAll();
     Person create(PersonDTO obj);
+    Person update(PersonDTO obj);
 }

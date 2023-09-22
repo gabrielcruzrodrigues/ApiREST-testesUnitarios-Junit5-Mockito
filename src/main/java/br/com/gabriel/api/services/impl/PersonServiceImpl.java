@@ -40,9 +40,15 @@ public class PersonServiceImpl implements PersonService {
         return personRepository.save(mapper.map(obj, Person.class));
     }
 
+    @Override
+    public Person update(PersonDTO obj) {
+        findByEmail(obj);
+        return personRepository.save(mapper.map(obj, Person.class));
+    }
+
     private void findByEmail(PersonDTO obj) {
         Optional<Person> person = personRepository.findByEmail(obj.getEmail());
-        if (person.isPresent()) {
+        if (person.isPresent() && !person.get().getId().equals(obj.getId())) {
             throw new DataIntegrityViolationException("Email já cadastrado no sistema");
         }
     }
