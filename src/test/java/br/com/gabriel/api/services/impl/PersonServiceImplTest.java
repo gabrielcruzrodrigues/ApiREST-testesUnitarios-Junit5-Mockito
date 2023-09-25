@@ -33,7 +33,7 @@ public class PersonServiceImplTest {
     
     public static final String PERSON_NOT_FOUND = "Pessoa não encontrada!";
     public static final int INDEX = 0;
-    public static final String INVALID_DATA = "Dados invalidos";
+    public static final String EMAIL_ALREADY_REGISTERED = "Email já cadastrado no sistema";
 
     @InjectMocks
     private PersonServiceImpl personService;
@@ -120,7 +120,7 @@ public class PersonServiceImplTest {
             personService.create(personDTO);
         } catch (Exception ex) {
             assertEquals(DataIntegrityViolationException.class, ex.getClass());
-            assertEquals("Email já cadastrado no sistema", ex.getMessage());
+            assertEquals(EMAIL_ALREADY_REGISTERED, ex.getMessage());
         }
     }
 
@@ -138,6 +138,19 @@ public class PersonServiceImplTest {
         assertEquals(NAME, response.getName());
         assertEquals(EMAIL, response.getEmail());
         assertEquals(PASSWORD, response.getPassword());
+    }
+
+    @Test
+    void shouldAnDataIntegrityViolationException_whenToCallUpdate() {
+        when(personRepository.findByEmail(anyString())).thenReturn(personOptional);
+
+        try {
+            personOptional.get().setId(2);
+            personService.update(personDTO);
+        } catch (Exception ex) {
+            assertEquals(DataIntegrityViolationException.class, ex.getClass());
+            assertEquals(EMAIL_ALREADY_REGISTERED, ex.getMessage());
+        }
     }
 
     @Test
