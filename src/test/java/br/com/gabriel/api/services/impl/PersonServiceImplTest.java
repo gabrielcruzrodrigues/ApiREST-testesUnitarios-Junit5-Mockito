@@ -30,7 +30,7 @@ public class PersonServiceImplTest {
     public static final String NAME = "Gabriel";
     public static final String EMAIL = "gabriel@gmail.com";
     public static final String PASSWORD = "123";
-    
+
     public static final String PERSON_NOT_FOUND = "Pessoa não encontrada!";
     public static final int INDEX = 0;
     public static final String EMAIL_ALREADY_REGISTERED = "Email já cadastrado no sistema";
@@ -160,6 +160,18 @@ public class PersonServiceImplTest {
         personService.delete(ID);
 
         verify(personRepository, times(1)).deleteById(anyInt());
+    }
+
+    @Test
+    void shouldAnObjectNotFoundException_whenToCallDelete() {
+        when(personRepository.findById(anyInt())).thenThrow(new ObjectNotFoundException(PERSON_NOT_FOUND));
+
+        try {
+            personService.delete(ID);
+        } catch(Exception ex) {
+            assertEquals(ObjectNotFoundException.class, ex.getClass());
+            assertEquals(PERSON_NOT_FOUND, ex.getMessage());
+        }
     }
 
     private void startPerson() {
