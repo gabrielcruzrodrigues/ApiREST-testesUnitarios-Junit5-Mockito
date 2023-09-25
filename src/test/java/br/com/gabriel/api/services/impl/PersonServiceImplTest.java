@@ -12,7 +12,9 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.util.Assert;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -29,6 +31,7 @@ public class PersonServiceImplTest {
     public static final String PASSWORD = "123";
     
     public static final String PERSON_NOT_FOUND = "Pessoa não encontrada!";
+    public static final int INDEX = 0;
 
     @InjectMocks
     private PersonServiceImpl personService;
@@ -75,7 +78,19 @@ public class PersonServiceImplTest {
     }
 
     @Test
-    void findAll() {
+    void shouldAnListOfPerson_whenToCallFindAll() {
+        when(personRepository.findAll()).thenReturn(List.of(person));
+
+        List<Person> response = personRepository.findAll();
+
+        assertNotNull(response);
+        assertEquals(1, response.size());
+        assertEquals(person.getClass(), response.get(INDEX).getClass());
+
+        assertEquals(ID, response.get(INDEX).getId());
+        assertEquals(NAME, response.get(INDEX).getName());
+        assertEquals(EMAIL, response.get(INDEX).getEmail());
+        assertEquals(PASSWORD, response.get(INDEX).getPassword());
     }
 
     @Test
