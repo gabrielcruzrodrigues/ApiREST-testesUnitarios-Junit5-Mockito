@@ -92,7 +92,20 @@ class PersonResourceTest {
     }
 
     @Test
-    void create() {
+    void shouldAnSuccess_whenToCallCreate() {
+        when(personService.create(any())).thenReturn(person);
+
+        ResponseEntity<PersonDTO> response = personResource.create(personDTO);
+
+        assertNotNull(response);
+        assertEquals(ResponseEntity.class, response.getClass());
+        assertEquals(HttpStatus.CREATED, response.getStatusCode());
+        assertNotNull(response.getHeaders().get("Location"));
+
+//        assertEquals(ID, response.getBody().getId());
+//        assertEquals(NAME, response.getBody().getName());
+//        assertEquals(EMAIL, response.getBody().getEmail());
+//        assertEquals(PASSWORD, response.getBody().getPassword());
     }
 
     @Test

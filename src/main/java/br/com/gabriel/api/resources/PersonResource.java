@@ -1,8 +1,7 @@
 package br.com.gabriel.api.resources;
 
-import br.com.gabriel.api.domain.Person;
 import br.com.gabriel.api.domain.dto.PersonDTO;
-import br.com.gabriel.api.services.PersonService;
+import br.com.gabriel.api.services.impl.PersonServiceImpl;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +22,7 @@ public class PersonResource {
     private ModelMapper mapper;
 
     @Autowired
-    private PersonService personService;
+    private PersonServiceImpl personService;
 
     @GetMapping(value = ID)
     public ResponseEntity<PersonDTO> findById(@PathVariable Integer id) {
