@@ -101,15 +101,24 @@ class PersonResourceTest {
         assertEquals(ResponseEntity.class, response.getClass());
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
         assertNotNull(response.getHeaders().get("Location"));
-
-//        assertEquals(ID, response.getBody().getId());
-//        assertEquals(NAME, response.getBody().getName());
-//        assertEquals(EMAIL, response.getBody().getEmail());
-//        assertEquals(PASSWORD, response.getBody().getPassword());
     }
 
     @Test
-    void update() {
+    void shouldAnSuccessAndPersonInstance_whenToCallCreate() {
+        when(personService.update(personDTO)).thenReturn(person);
+        when(modelMapper.map(any(), any())).thenReturn(personDTO);
+
+        ResponseEntity<PersonDTO> response = personResource.update(personDTO, ID);
+
+        assertNotNull(response);
+        assertNotNull(response.getBody());
+        assertEquals(personDTO.getClass(), response.getBody().getClass());
+        assertEquals(ResponseEntity.class, response.getClass());
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+
+        assertEquals(ID, response.getBody().getId());
+        assertEquals(NAME, response.getBody().getName());
+        assertEquals(EMAIL, response.getBody().getEmail());
     }
 
     @Test
