@@ -125,15 +125,23 @@ public class PersonServiceImplTest {
     }
 
     @Test
-    void update() {
+    void shouldAnSuccess_whenToCallUpdate() {
+        when(personRepository.save(any())).thenReturn(person);
+
+        Person response = personService.update(personDTO);
+
+
+        assertNotNull(response);
+        assertEquals(person.getClass(), response.getClass());
+
+        assertEquals(ID, response.getId());
+        assertEquals(NAME, response.getName());
+        assertEquals(EMAIL, response.getEmail());
+        assertEquals(PASSWORD, response.getPassword());
     }
 
     @Test
     void delete() {
-    }
-
-    @Test
-    void findByEmail() {
     }
 
     private void startPerson() {
