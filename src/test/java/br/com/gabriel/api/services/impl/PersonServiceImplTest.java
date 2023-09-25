@@ -21,7 +21,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest
 public class PersonServiceImplTest {
@@ -154,7 +154,12 @@ public class PersonServiceImplTest {
     }
 
     @Test
-    void delete() {
+    void shouldAnSuccess_whenToCallDelete() {
+        when(personRepository.findById(anyInt())).thenReturn(personOptional);
+        doNothing().when(personRepository).deleteById(anyInt());
+        personService.delete(ID);
+
+        verify(personRepository, times(1)).deleteById(anyInt());
     }
 
     private void startPerson() {
