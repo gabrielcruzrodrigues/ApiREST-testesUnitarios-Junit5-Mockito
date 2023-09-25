@@ -19,6 +19,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 
@@ -70,7 +71,7 @@ public class PersonServiceImplTest {
         when(personRepository.findById(anyInt())).thenThrow(new ObjectNotFoundException(PERSON_NOT_FOUND));
 
         try {
-            personRepository.findById(ID);
+            personService.findById(ID);
         } catch(Exception ex) {
             assertEquals(ObjectNotFoundException.class, ex.getClass());
             assertEquals(PERSON_NOT_FOUND, ex.getMessage());
@@ -81,7 +82,7 @@ public class PersonServiceImplTest {
     void shouldAnListOfPerson_whenToCallFindAll() {
         when(personRepository.findAll()).thenReturn(List.of(person));
 
-        List<Person> response = personRepository.findAll();
+        List<Person> response = personService.findAll();
 
         assertNotNull(response);
         assertEquals(1, response.size());
@@ -94,8 +95,18 @@ public class PersonServiceImplTest {
     }
 
     @Test
-    void create() {
+    void shouldAnSuccess_whenToCallCreate() {
+        when(personRepository.save(any())).thenReturn(person);
 
+        Person response = personService.create(personDTO);
+
+        assertNotNull(response);
+        assertEquals(person.getClass(), response.getClass());
+
+        assertEquals(ID, response.getId());
+        assertEquals(NAME, response.getName());
+        assertEquals(EMAIL, response.getEmail());
+        assertEquals(PASSWORD, response.getPassword());
     }
 
     @Test
