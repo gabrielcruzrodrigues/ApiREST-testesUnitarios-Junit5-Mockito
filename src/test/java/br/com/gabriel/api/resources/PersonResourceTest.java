@@ -133,6 +133,7 @@ class PersonResourceTest {
         verify(personService, times(1)).delete(anyInt());
     }
 
+
     private void startPerson() {
         person = new Person(ID, NAME, EMAIL, PASSWORD);
         personDTO = new PersonDTO(ID, NAME, EMAIL, PASSWORD);
