@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest
 class PersonResourceTest {
@@ -122,7 +122,15 @@ class PersonResourceTest {
     }
 
     @Test
-    void delete() {
+    void shouldAnSuccess_whenToCallDelete() {
+        doNothing().when(personService).delete(anyInt());
+
+        ResponseEntity<PersonDTO> response = personResource.delete(ID);
+
+        assertNotNull(response);
+        assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
+        assertEquals(ResponseEntity.class, response.getClass());
+        verify(personService, times(1)).delete(anyInt());
     }
 
     private void startPerson() {
