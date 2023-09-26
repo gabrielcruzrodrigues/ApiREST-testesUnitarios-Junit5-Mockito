@@ -18,4 +18,73 @@ O projeto conta com uma apiREST de pessoas, com um Crud completo, usando o banco
 # Como rodar o projeto:
 1. Tenha o JDK17 instalado na sua maquina!
 2. Clone o projeto para um diretorio local.
-3. 
+3. Abra o projeto em sua IDE de preferência e baixe as dependências.
+4. Inicie o projeto!
+
+O projeto já vem com carga inicial de dados, então vc já vai ter alguns registros no banco para poder manipular.
+
+### para verificar os testes e rodar os mesmos, va até: `src/test/java`
+
+# EndPoints
+#### GET /person - status: 200
+Resgata todos os registros do banco de dados.
+```
+[
+    {
+        "id": 1,
+        "name": "Gabriel",
+        "email": "gabriel@gmail.com"
+    },
+    {
+        "id": 2,
+        "name": "Samuel",
+        "email": "samuel@gmail.com"
+    },
+    {
+        "id": 3,
+        "name": "Ana",
+        "email": "Ana@gmail.com"
+    },
+    {
+        "id": 4,
+        "name": "Sara",
+        "email": "Sara@gmail.com"
+    },
+    {
+        "id": 5,
+        "name": "Pedro",
+        "email": "Pedro@gmail.com"
+    }
+]
+```
+#### GET /person/:id - status: 200
+Busca pessoa por id.
+```
+{
+    "name": "Gabriel",
+    "email": "gabriel@gmail.com",
+}
+```
+
+#### POST /person - status: 201
+cria nova pessoa.
+```
+{
+    "name": "Gabriel",
+    "email": "gabriel@gmail.com",
+    "password": "123"
+}
+```
+#### PUT /person/:id - status: 200
+Atualiza registro no banco de dados.
+```
+{
+    "name": "Gabriel",
+    "email": "gabriel@gmail.com",
+    "password": "123"
+}
+```
+#### DELETE /person/:id - status: 204
+Deleta pessoas do banco de dados.
+
+
