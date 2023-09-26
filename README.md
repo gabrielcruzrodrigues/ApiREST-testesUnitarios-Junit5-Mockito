@@ -42,8 +42,8 @@ Resgata todos os registros do banco de dados.
     },
     {
         "id": 3,
-        "name": "Ana",
-        "email": "Ana@gmail.com"
+        "name": "Stéfany",
+        "email": "Stéfany@gmail.com"
     },
     {
         "id": 4,
