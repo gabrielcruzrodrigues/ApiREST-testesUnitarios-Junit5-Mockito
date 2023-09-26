@@ -20,10 +20,13 @@ public class LocalConfig {
 
     @Bean
     public void startDB() {
-        Person person1 = new Person(null, "Gabriel", "gabriel@gmail.com", "123");
-        Person person2 = new Person(null, "Samuel", "samuel@gmail.com", "123");
+        Person person1 = new Person(null, "Gabriel", "gabriel@gmail.com", "123456789");
+        Person person2 = new Person(null, "Samuel", "samuel@gmail.com", "123456789");
+        Person person3 = new Person(null, "Stéfany", "stefany@gmail.com", "123456789");
+        Person person4 = new Person(null, "Jurema", "jurema@gmail.com", "123456789");
+        Person person5 = new Person(null, "Pedro", "pedro@gmail.com", "123456789");
 
-        personRepository.saveAll(List.of(person1, person2));
+        personRepository.saveAll(List.of(person1, person2, person3, person4, person5));
     }
 
 }
